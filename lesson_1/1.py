@@ -38,7 +38,7 @@ for i in range(1, 101):
 # 4) Реализовать функцию bank, кот  орая приннимает следующие
 # аргументы: сумма депозита, кол-во лет, и процент. Результатом
 # выполнения должна быть сумма по истечению депозита
-def bank(money: int, years: int, percent: int):
+def bank(money: int, years: int, percent: int) -> int:
     return money * years * percent
 
 
