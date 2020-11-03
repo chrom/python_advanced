@@ -73,7 +73,7 @@ rx450 = SUV('Lexus', 'RX 450h', 2020, 220)
 print(gs350.print_description())
 print(is500.print_description())
 print(rx450.print_description())
-print('*'*30)
+print('*' * 30)
 
 
 # 2) Создать класс магазина. Конструктор должен инициализировать
@@ -83,6 +83,35 @@ print('*'*30)
 # переменной класса, которая будет хранить общее количество
 # товаров проданных всеми магазинами.
 
+class Store:
+    _name: str = ''
+    _soldQty: int = 0
+
+    def __init__(self, name: str, qty: int):
+        self._name = name
+        self._soldQty = qty
+
+    def name(self) -> str:
+        return self._name
+
+    def add_qty(self, qty: int):
+        self._soldQty += qty
+
+    def get_sold_product(self):
+        return self._soldQty
+
+
+store1 = Store('Adidass', 200)
+store1.add_qty(300)
+store1.add_qty(3)
+store2 = Store('Puma', 2000)
+store2.add_qty(200)
+store2.add_qty(20)
+print(store1.name())
+print(store1.get_sold_product())
+print(store2.name())
+print(store2.get_sold_product())
+print('*' * 30)
 
 
 # 3 Создать класс точки, реализовать конструктор который
