@@ -4,62 +4,55 @@
 # переопределите методы базового класса.
 
 class Car:
-    __year_model: int
-    __max_speed: int
-    __brand: str
-    __model: str
 
     def __init__(self, brand: str, model: str, year: int, max_speed: int):
-        self.__brand = brand
-        self.__model = model
-        self.__max_speed = max_speed
-        self.__year_model = year
+        self._brand = brand
+        self._model = model
+        self._max_speed = max_speed
+        self._year_model = year
 
     @property
     def brand(self) -> str:
-        return self.__brand
+        return self._brand
 
     @brand.setter
     def brand(self, value: str):
-        self.__brand = value
+        self._brand = value
 
     @property
     def model(self) -> str:
-        return self.__model
+        return self._model
 
     @model.setter
     def model(self, value: str):
-        self.__model = value
+        self._model = value
 
     @property
     def year(self) -> int:
-        return self.__year_model
+        return self._year_model
 
     @year.setter
     def year(self, value: int):
-        self.__year_model = value
+        self._year_model = value
 
     @property
     def max_speed(self) -> int:
-        return self.__max_speed
+        return self._max_speed
 
     @max_speed.setter
     def max_speed(self, value: int):
-        self.__max_speed = value
+        self._max_speed = value
 
     def print_description(self):
-        return "Current car: \nBrand: {}\nModel: {}\nYear of production: {} \nMax speed: {}".format(self.brand,
-                                                                                                    self.model,
-                                                                                                    self.year,
-                                                                                                    self.max_speed)
+        return f"Current car: \nBrand: {self.brand}\nModel: {self.brand}\nYear of production: {self.year} \nMax speed: {self.max_speed}"
 
 
 class Sedan(Car):
     __car_body_type = 'Sedan'
 
     def print_description(self):
-        return "Current car type is {}: \nBrand: {}\nModel: {}\nYear of production: {} \nMax speed: {}" \
-            .format(self.__car_body_type, self.brand, self.model, self.year, self.max_speed)
+        return f"Current car type is {self.__car_body_type}: \nBrand: {self.brand}\nModel: {self.model}\nYear of " \
+               f"production: {self.year} \nMax speed: {self.max_speed} "
 
 
 class SUV(Sedan):
@@ -84,14 +77,11 @@ print('*' * 30)
 # товаров проданных всеми магазинами.
 
 class Store:
-    _name: str = ''
-    _soldQty: int = 0
-
-    def __init__(self, name: str, qty: int):
+    def __init__(self, name: str, qty: int = 0):
         self._name = name
         self._soldQty = qty
 
-    def name(self) -> str:
+    def get_name(self) -> str:
         return self._name
 
     def add_qty(self, qty: int):
@@ -107,9 +97,9 @@ store1.add_qty(3)
 store2 = Store('Puma', 2000)
 store2.add_qty(200)
 store2.add_qty(20)
-print(store1.name())
+print(store1.get_name())
 print(store1.get_sold_product())
-print(store2.name())
+print(store2.get_name())
 print(store2.get_sold_product())
 print('*' * 30)
 
@@ -177,30 +167,21 @@ class Dot:
         return self
 
     def __imul__(self, other):
-        try:
-            self._z *= other.z
-            self._y *= other.y
-            self._x *= other.x
-        except Exception as e:
-            return str(e)
+        self._z *= other.z
+        self._y *= other.y
+        self._x *= other.x
         return self
 
     def __mul__(self, other):
-        try:
-            self._z *= other.z
-            self._y *= other.y
-            self._x *= other.x
-        except Exception as e:
-            return str(e)
+        self._z *= other.z
+        self._y *= other.y
+        self._x *= other.x
         return self
 
     def __ifloordiv__(self, other):
-        try:
-            self._z *= other.z
-            self._y *= other.y
-            self._x *= other.x
-        except ZeroDivisionError:
-            return 'Zero division error. You can do that.'
+        self._z *= other.z
+        self._y *= other.y
+        self._x *= other.x
         return self
 
     def __truediv__(self, other):
