@@ -10,14 +10,14 @@ class Authorization:
     users: dict = {}
 
     def __init__(self):
-        __is_authorized: bool
+        _is_authorized: bool = False
 
     def registration(self):
-        print(Authorization.users.get(self.email))
-        if Authorization.users.get(self.email) is None:
-            if self.passwd_validate(self.password):
-                self.password = self.hash_password(self.password)
-                Authorization.users[self.email] = self
+        user = Authorization.users.get(self.email)
+        if user is None:
+            if self.password_validate(user.password):
+                user.password = self.hash_password()
+                Authorization.users[user.email] = user
             else:
                 raise Warning('The password does not meet the specified criteria.')
         else:
@@ -29,12 +29,12 @@ class Authorization:
 
         user = Authorization.users.get(email)
         if self.verify_password(user.password, password):
-            user.__is_authorized = True
+            user._is_authorized = True
         else:
             raise Warning('Password is wrong!')
 
-    @staticmethod
-    def hash_password(password: str) -> str:
+    def hash_password(self) -> str:
+        password = self.password
         """Hash a password for storing."""
         salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
         pwdhash = hashlib.pbkdf2_hmac('sha512', password.encode('utf-8'),
@@ -55,7 +55,7 @@ class Authorization:
         return pwdhash == stored_password
 
     @staticmethod
-    def passwd_validate(password: str) -> bool:
+    def password_validate(password: str) -> bool:
         """Check if the password is valid.
 
         This function checks the following conditions
@@ -104,6 +104,7 @@ class User(Authorization):
         self._email = email
         self._password = password
         self._created_at = datetime.date.today()
+        super().__init__()
 
     @property
     def is_admin(self) -> bool:
@@ -152,6 +153,5 @@ user3 = User('2admin@admin.com', 'PasSword123$')
 user3.registration()
 user3.authorization('1admin@admin.com', 'PasSword123$')
 print(user3.__dict__)
-
 
 # 3) Создать класс поста, который имеет дату публикации и её содержимое.

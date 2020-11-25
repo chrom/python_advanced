@@ -2,7 +2,7 @@ import math
 from math import sqrt
 
 
-class Complex(object):
+class Complex():
 
     def __init__(self, real, imag=0.0):
         self.real = real

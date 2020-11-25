@@ -65,9 +65,10 @@ print('*' * 50)
 # get, items, keys, values. Так же перегрузить операцию сложения для
 # словарей, которая возвращает новый расширенный объект.
 
-class CustomDict(dict):
+class CustomDict:
 
     def __init__(self, custom_dict: dict = {}):
+        print(custom_dict)
         self._data = custom_dict
 
     def get(self, key: str):
@@ -98,10 +99,11 @@ class CustomDict(dict):
         return CustomDict(dict(**self._data, **other._data))
 
 
+
 a = CustomDict()
 a.foo = "bar"
 a.asd = "eqw"
-a['qqqqq'] = 'fowwwwo'
+a.qqqqq = 'fowwwwo'
 # print(a.keys())
 # print(a.values())
 # print(a.items())
