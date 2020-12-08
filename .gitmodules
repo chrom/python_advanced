@@ -1,3 +1,6 @@
 [submodule "itea-october"]
 	path = itea-october
 	url = git@github.com:antonplkv/itea-october.git
+[submodule "itea_october_project"]
+	path = itea_october_project
+	url = git@github.com:antonplkv/itea_october_project.git
